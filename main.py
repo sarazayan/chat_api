@@ -7,14 +7,18 @@ from langchain.vectorstores import Chroma
 from pdf2image import convert_from_path
 from langchain.retrievers.self_query.base import SelfQueryRetriever
 from langchain.document_loaders import PyPDFLoader
+from langchain.vectorstores.faiss import FAISS
+import faiss
 loader = PyPDFLoader("volkswagen.pdf") #Path to your PDF File
 docs = loader.load()
 documents = loader.load_and_split() 
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=64) 
 texts = text_splitter.split_documents(documents)
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2") 
-db = Chroma.from_documents(texts, embeddings, persist_directory="db")
-retriever=db.as_retriever(search_kwargs={"k": 2})
+db3 = FAISS.load_local("faiss_index",embeddings)
+retriever = db3.as_retriever()
+#db = Chroma.from_documents(texts, embeddings, persist_directory="db")
+#retriever=db.as_retriever(search_kwargs={"k": 2})
 model_n_ctx = 1000
 model_path = r"C:\Users\szayan\Downloads\ggml-gpt4all-j-v1.3-groovy(1).bin" #Path to where you downloaded the model using the follwoing link : https://gpt4all.io/models/ggml-gpt4all-j-v1.3-groovy.bin
 llm = GPT4All(model=model_path, n_ctx=1000, backend="gptj",temp=0.1,verbose=False)
