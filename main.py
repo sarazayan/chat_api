@@ -16,7 +16,7 @@ embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-
 db = Chroma.from_documents(texts, embeddings, persist_directory="db")
 retriever=db.as_retriever(search_kwargs={"k": 2})
 model_n_ctx = 1000
-model_path = "/home/user/ggml-gpt4all-j-v1.3-groovy.bin" #Path to where you downloaded the model using the follwoing link : https://gpt4all.io/models/ggml-gpt4all-j-v1.3-groovy.bin
+model_path = "C:\Users\szayan\Downloads\ggml-gpt4all-j-v1.3-groovy(1).bin" #Path to where you downloaded the model using the follwoing link : https://gpt4all.io/models/ggml-gpt4all-j-v1.3-groovy.bin
 llm = GPT4All(model=model_path, n_ctx=1000, backend="gptj",temp=0.1,verbose=False)
 qa = RetrievalQA.from_chain_type(
         llm=llm,
