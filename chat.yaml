@@ -3,7 +3,7 @@ services:
   - type: web
     plan: standard
     name: app
-    env: 
+    env: python
       - type: python
         PYTHON_VERSION: 3.10.6
     envVars:
