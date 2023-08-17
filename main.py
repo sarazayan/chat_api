@@ -7,7 +7,7 @@ from langchain.vectorstores import Chroma
 from pdf2image import convert_from_path
 from langchain.retrievers.self_query.base import SelfQueryRetriever
 from langchain.document_loaders import PyPDFLoader
-loader = PyPDFLoader("/home/user/ChatwithPDF/volsi.pdf") #Path to your PDF File
+loader = PyPDFLoader("volkswagen.pdf") #Path to your PDF File
 docs = loader.load()
 documents = loader.load_and_split() 
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=64) 
